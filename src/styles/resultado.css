@@ -1,0 +1,172 @@
+.resultado {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+  max-width: 600px;
+  margin: 0 auto;
+  padding-top: 12px;
+  text-align: center;
+}
+
+/* Anel de porcentagem com moldura dourada */
+.anel {
+  --progresso: 0deg;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  padding: 11px;
+  background: conic-gradient(var(--dourado) var(--progresso), rgba(255, 255, 255, 0.12) var(--progresso));
+  box-shadow: 0 0 0 5px var(--dourado-sombra), 0 0 56px rgba(255, 201, 52, 0.4);
+  animation: entrarAnel 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes entrarAnel {
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.anel__miolo {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 35%, var(--roxo), var(--roxo-noite));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.anel__miolo strong {
+  font-size: 2.8rem;
+  font-weight: 900;
+  line-height: 1;
+  color: var(--dourado);
+  text-shadow: 0 4px 0 var(--dourado-sombra);
+}
+
+.anel__miolo span {
+  margin-top: 8px;
+  font-weight: 700;
+  color: var(--texto-claro);
+}
+
+/* Nível */
+.nivel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.nivel__rotulo {
+  font-size: 0.9rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--texto-claro);
+}
+
+.nivel__icone {
+  font-size: 2.8rem;
+  animation: carimboNivel 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 1.2s both;
+}
+
+@keyframes carimboNivel {
+  from {
+    transform: scale(0) rotate(-45deg);
+  }
+  to {
+    transform: none;
+  }
+}
+
+.nivel__titulo {
+  font-size: clamp(1.6rem, 5vw, 2.3rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  color: var(--branco);
+  text-shadow: 0 5px 0 var(--roxo), 0 0 30px rgba(255, 201, 52, 0.35);
+  animation: surgir 0.5s ease 1.4s both;
+}
+
+.nivel__texto {
+  max-width: 440px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--texto-claro);
+  animation: surgir 0.5s ease 1.6s both;
+}
+
+/* Agradecimento */
+.resultado__final {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+  animation: surgir 0.5s ease 1.8s both;
+}
+
+.resultado__final h2 {
+  font-size: 1.25rem;
+  font-weight: 900;
+}
+
+.resultado__final p {
+  color: var(--texto-medio);
+  font-weight: 500;
+}
+
+.resultado__final code {
+  color: var(--roxo);
+  font-weight: 700;
+  word-break: break-all;
+}
+
+.resultado__acoes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 6px;
+}
+
+/* Confete */
+.confetes {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 30;
+}
+
+.confetes span {
+  position: absolute;
+  top: -20px;
+  width: 10px;
+  height: 16px;
+  border-radius: 2px;
+  opacity: 0;
+  animation-name: cair;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+@keyframes cair {
+  0% {
+    opacity: 1;
+    transform: translateY(0) rotate(0);
+  }
+  100% {
+    opacity: 0.8;
+    transform: translateY(110vh) rotate(720deg);
+  }
+}

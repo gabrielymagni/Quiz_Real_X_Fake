@@ -1,0 +1,5 @@
+Coloque aqui as 15 imagens do quiz com os nomes img01.jpg ... img15.jpg.
+
+Quais são sintéticas e quais são reais, além do título e contexto exibidos,
+é definido em src/data/imagens.js. Se usar outra extensão (.png, .webp),
+ajuste o campo "arquivo" lá.

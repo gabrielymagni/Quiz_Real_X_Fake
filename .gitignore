@@ -1,0 +1,27 @@
+# Dependências
+node_modules/
+
+# Build do Vite
+dist/
+dist-ssr/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Variáveis de ambiente
+.env
+.env.*
+!.env.example
+
+# Respostas de participantes (não versionar dados da pesquisa)
+resposta_*.json
+
+# Editor e sistema
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp

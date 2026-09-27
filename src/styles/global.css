@@ -1,0 +1,244 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap');
+
+:root {
+  --roxo-noite: #12052e;
+  --roxo-fundo: #2a0b6b;
+  --roxo: #46178f;
+  --roxo-claro: #864cbf;
+  --roxo-sombra: #2d0e5e;
+  --dourado: #ffc934;
+  --dourado-claro: #ffe27a;
+  --dourado-sombra: #b47d00;
+  --verde: #26890c;
+  --verde-sombra: #175206;
+  --vermelho: #e21b3c;
+  --vermelho-sombra: #8f0f24;
+  --azul: #1368ce;
+  --branco: #ffffff;
+  --cinza-claro: #f2f2f2;
+  --texto-escuro: #1d1333;
+  --texto-medio: #5b5470;
+  --texto-claro: rgba(255, 255, 255, 0.82);
+  --raio: 12px;
+  --fonte: 'Montserrat', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Base de 14px: todos os tamanhos em rem ficam proporcionalmente menores */
+html {
+  font-size: 87.5%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--fonte);
+  color: var(--branco);
+  line-height: 1.45;
+  background: radial-gradient(ellipse at 50% 30%, var(--roxo-fundo) 0%, var(--roxo-noite) 70%) fixed;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* Holofotes girando ao fundo, estilo palco de programa de auditório */
+body::before {
+  content: '';
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 220vmax;
+  height: 220vmax;
+  z-index: -2;
+  background: repeating-conic-gradient(from 0deg, rgba(255, 255, 255, 0.045) 0deg 9deg, transparent 9deg 22deg);
+  transform: translate(-50%, -50%);
+  animation: girar 90s linear infinite;
+}
+
+/* Brilho de palco no topo e "chão" iluminado */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 60% 35% at 50% -5%, rgba(255, 201, 52, 0.22), transparent 70%),
+    radial-gradient(ellipse 80% 30% at 50% 105%, rgba(134, 76, 191, 0.45), transparent 70%);
+}
+
+h1,
+h2,
+p {
+  margin: 0;
+}
+
+button {
+  font-family: inherit;
+}
+
+.app {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 28px 20px 72px;
+}
+
+/* Cartão branco estilo Kahoot */
+.painel-branco {
+  background: var(--branco);
+  color: var(--texto-escuro);
+  border-radius: var(--raio);
+  padding: 20px;
+  box-shadow: 0 5px 0 rgba(0, 0, 0, 0.25), 0 14px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* Botões "gordinhos" com sombra 3D */
+.botao {
+  border: none;
+  border-radius: 10px;
+  padding: 11px 22px;
+  font-size: 1rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform 0.1s, box-shadow 0.1s, filter 0.2s, opacity 0.2s;
+}
+
+.botao:hover:not(:disabled) {
+  filter: brightness(1.08);
+}
+
+.botao:active:not(:disabled) {
+  transform: translateY(4px);
+}
+
+.botao:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+  filter: grayscale(0.7);
+}
+
+.botao--grande {
+  width: 100%;
+  padding: 14px 22px;
+  font-size: 1.1rem;
+}
+
+.botao--dourado {
+  background: linear-gradient(180deg, var(--dourado-claro), var(--dourado));
+  color: var(--texto-escuro);
+  box-shadow: 0 6px 0 var(--dourado-sombra);
+}
+
+.botao--dourado:active:not(:disabled) {
+  box-shadow: 0 2px 0 var(--dourado-sombra);
+}
+
+.botao--branco {
+  background: var(--branco);
+  color: var(--texto-escuro);
+  box-shadow: 0 6px 0 rgba(0, 0, 0, 0.3);
+}
+
+.botao--branco:active:not(:disabled) {
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.3);
+}
+
+.botao:focus-visible,
+.opcao-chip:focus-visible,
+.likert__ponto:focus-visible,
+.classificacao__botao:focus-visible {
+  outline: 3px solid var(--dourado);
+  outline-offset: 3px;
+}
+
+/* Campos */
+.campo-texto {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 2px solid #d6d1e3;
+  background: var(--cinza-claro);
+  color: var(--texto-escuro);
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 500;
+  resize: vertical;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.campo-texto:focus {
+  outline: none;
+  border-color: var(--roxo);
+  box-shadow: 0 0 0 4px rgba(70, 23, 143, 0.18);
+}
+
+/* Selo (pílula) */
+.inicio__selo {
+  display: inline-block;
+  padding: 6px 15px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 2px solid var(--dourado);
+  color: var(--dourado);
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* Animações */
+.surgir {
+  animation: surgir 0.35s ease both;
+}
+
+@keyframes surgir {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.08);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes girar {
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .app {
+    padding: 20px 16px 56px;
+  }
+
+  .painel-branco {
+    padding: 18px;
+  }
+}
