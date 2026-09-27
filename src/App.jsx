@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import Inicio from './components/Inicio.jsx';
 import Quiz from './components/Quiz.jsx';
+import AvaliacaoInterface from './components/AvaliacaoInterface.jsx';
 import Resultado from './components/Resultado.jsx';
 import { IMAGENS, QTD_JUSTIFICATIVAS } from './data/imagens.js';
 import { embaralhar, sortearJustificativas, gerarIdParticipante } from './utils/sorteio.js';
@@ -10,6 +11,8 @@ export default function App() {
   const [etapa, setEtapa] = useState('inicio');
   const [sessao, setSessao] = useState(null);
   const [demografia, setDemografia] = useState(null);
+  const [respostas, setRespostas] = useState(null);
+  const [fimQuiz, setFimQuiz] = useState(null);
   const [registro, setRegistro] = useState(null);
 
   // Pré-carrega as imagens enquanto o participante preenche o formulário
@@ -31,8 +34,15 @@ export default function App() {
     window.scrollTo({ top: 0 });
   }
 
-  function finalizarQuiz(respostas) {
-    const novoRegistro = montarRegistro({ sessao, demografia, respostas });
+  function finalizarQuiz(respostasQuiz) {
+    setRespostas(respostasQuiz);
+    setFimQuiz(new Date().toISOString());
+    setEtapa('avaliacao');
+    window.scrollTo({ top: 0 });
+  }
+
+  function concluirAvaliacao(avaliacaoInterface) {
+    const novoRegistro = montarRegistro({ sessao, demografia, respostas, fimQuiz, avaliacaoInterface });
     salvarBackupLocal(novoRegistro);
     setRegistro(novoRegistro);
     setEtapa('resultado');
@@ -45,6 +55,7 @@ export default function App() {
       {etapa === 'quiz' && (
         <Quiz ordem={sessao.ordem} justificar={sessao.justificar} onFinalizar={finalizarQuiz} />
       )}
+      {etapa === 'avaliacao' && <AvaliacaoInterface onConcluir={concluirAvaliacao} />}
       {etapa === 'resultado' && <Resultado registro={registro} />}
     </main>
   );

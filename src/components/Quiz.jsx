@@ -5,8 +5,8 @@ import { MIN_CARACTERES_JUSTIFICATIVA } from '../data/imagens.js';
 import '../styles/quiz.css';
 
 const OPCOES = [
-  { valor: 'real', icone: '📷', rotulo: 'Real' },
-  { valor: 'fake', icone: '🤖', rotulo: 'Fake' },
+  { valor: 'real', rotulo: 'Real' },
+  { valor: 'fake', rotulo: 'Fake' },
 ];
 
 function novaMedicao() {
@@ -70,8 +70,6 @@ export default function Quiz({ ordem, justificar, onFinalizar }) {
         ordem: indice + 1,
         imagemId: imagem.id,
         arquivo: imagem.arquivo,
-        contexto: imagem.contexto,
-        titulo: imagem.titulo,
         tipoReal: imagem.tipo,
         resposta,
         correta,
@@ -108,16 +106,6 @@ export default function Quiz({ ordem, justificar, onFinalizar }) {
         <span className="placar__contador">
           Imagem <strong>{indice + 1}</strong> de {ordem.length}
         </span>
-        {/* <ol className="placar__trilha" aria-hidden="true">
-          {ordem.map((item, i) => (
-            <li
-              key={item.id}
-              className={`${i < respostas.length ? 'feito' : ''} ${i === indice ? 'atual' : ''}`}
-            >
-              {i + 1}
-            </li>
-          ))}
-        </ol> */}
       </header>
 
       <div className="palco" key={imagem.id}>
@@ -136,7 +124,6 @@ export default function Quiz({ ordem, justificar, onFinalizar }) {
                   aria-pressed={resposta === opcao.valor}
                   onClick={() => classificar(opcao.valor)}
                 >
-                  {/* <span className="classificacao__icone">{opcao.icone}</span> */}
                   {opcao.rotulo}
                 </button>
               ))}
@@ -178,11 +165,8 @@ export default function Quiz({ ordem, justificar, onFinalizar }) {
             <span className="feedback__icone">{feedback.correta ? '✔' : '✘'}</span>
             <h2>{feedback.correta ? 'Correto!' : 'Incorreto!'}</h2>
             <p>{imagem.tipo === 'sintetica' ? 'Essa imagem foi gerada por IA' : 'Essa é uma foto real'}</p>
-            {/* {feedback.sequencia >= 2 && (
-              <span className="feedback__sequencia">🔥 {feedback.sequencia} acertos seguidos</span>
-            )} */}
             <button ref={botaoProximo} type="button" className="botao botao--branco botao--grande" onClick={avancar}>
-              {ultima ? 'Ver meu resultado 🏆' : 'Próxima imagem ▶'}
+              {ultima ? 'Continuar ▶' : 'Próxima imagem ▶'}
             </button>
           </div>
         )}

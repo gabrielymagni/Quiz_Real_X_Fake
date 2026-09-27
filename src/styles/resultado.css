@@ -131,6 +131,13 @@
   word-break: break-all;
 }
 
+.resultado__final .resultado__fonte {
+  margin-top: 4px;
+  padding-top: 14px;
+  border-top: 1px solid #e6e1f0;
+  font-size: 0.85rem;
+}
+
 .resultado__acoes {
   display: flex;
   flex-wrap: wrap;

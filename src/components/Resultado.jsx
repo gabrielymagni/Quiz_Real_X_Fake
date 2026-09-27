@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { obterNivel } from '../utils/gamificacao.js';
 import { baixarJSON } from '../utils/registro.js';
+import { FONTE_IMAGENS } from '../data/imagens.js';
 import '../styles/resultado.css';
 
 const CORES_CONFETE = ['#e21b3c', '#1368ce', '#ffc934', '#26890c', '#ffffff'];
@@ -75,7 +76,7 @@ export default function Resultado({ registro }) {
       </div>
 
       <div className="painel-branco resultado__final">
-        <h2>🙏 Obrigado por participar!</h2>
+        <h2>Obrigada por participar!</h2>
         <p>
           O arquivo com as suas respostas foi baixado automaticamente
           (<code>resposta_{registro.participanteId}.json</code>). Se o download não começou, clique no botão abaixo e
@@ -86,6 +87,7 @@ export default function Resultado({ registro }) {
             ⬇ Baixar respostas (JSON)
           </button>
         </div>
+        <p className="resultado__fonte">As imagens utilizadas neste quiz foram retiradas do site https://www.magnific.com/.</p>
       </div>
     </section>
   );

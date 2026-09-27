@@ -12,8 +12,9 @@ function media(valores) {
 }
 
 // Monta o objeto final que vai para o arquivo JSON
-export function montarRegistro({ sessao, demografia, respostas }) {
+export function montarRegistro({ sessao, demografia, respostas, fimQuiz, avaliacaoInterface }) {
   const fim = new Date();
+  const inicio = new Date(sessao.inicio).getTime();
   const resumo = resumirRespostas(respostas);
   const sinteticas = respostas.filter((r) => r.tipoReal === 'sintetica');
   const reais = respostas.filter((r) => r.tipoReal === 'real');
@@ -22,8 +23,10 @@ export function montarRegistro({ sessao, demografia, respostas }) {
     versaoInstrumento: VERSAO_INSTRUMENTO,
     participanteId: sessao.participanteId,
     inicio: sessao.inicio,
+    fimQuiz,
     fim: fim.toISOString(),
-    duracaoTotalMs: fim.getTime() - new Date(sessao.inicio).getTime(),
+    duracaoQuizMs: new Date(fimQuiz).getTime() - inicio,
+    duracaoTotalMs: fim.getTime() - inicio,
     demografia,
     configuracao: {
       ordemApresentacao: sessao.ordem.map((imagem) => imagem.id),
@@ -49,6 +52,7 @@ export function montarRegistro({ sessao, demografia, respostas }) {
       confiancaMediaErros: media(respostas.filter((r) => !r.correta).map((r) => r.confianca)),
       maiorSequenciaAcertos: resumo.maiorSequencia,
     },
+    avaliacaoInterface,
     ambiente: {
       userAgent: navigator.userAgent,
       idioma: navigator.language,
